@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <envs>
+      <env name="DB_USERNAME" value="ttt" />
+      <env name="DB_PASS" value="ttt" />
+      <env name="DB_URL" value="jdbc:postgresql://localhost:5432/ttt" />
+    </envs>
+    <module name="tictatctoe" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="sb.er.tictatctoe.Application" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,42 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="20230122_1200" author="eczemadev">
+        <sql>
+            create table if not exists game
+            (
+                id          bigserial    not null primary key,
+                modified_at timestamp    not null,
+                session_id  uuid         not null,
+                state       varchar(255) not null
+            );
+
+            create index game_session_id_idx on game (session_id);
+            create index game_modified_at_idx on game (modified_at);
+            create index game_state_idx on game (state);
+
+            create table if not exists turn
+            (
+                id         bigserial not null primary key,
+                t_column   integer   not null,
+                created_at timestamp not null,
+                player     integer   not null,
+                t_row      integer   not null
+            );
+
+            create table if not exists game_turns
+            (
+                game_id  bigint not null
+                    constraint game_fk
+                        references game,
+                turns_id bigint not null
+                    constraint turn_uk
+                        unique
+                    constraint turn_fk
+                        references turn
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

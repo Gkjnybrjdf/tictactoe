@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    image: ttt:latest
+    environment:
+      DB_USERNAME: ttt
+      DB_PASS: ttt
+      DB_URL: jdbc:postgresql://ttt_postgres:5432/ttt
+    container_name: ttt_app
+    ports:
+      - '8080:8080'
+
+  db:
+    image: postgres:15
+    container_name: ttt_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./deploy/postgres/:/docker-entrypoint-initdb.d/
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres:
